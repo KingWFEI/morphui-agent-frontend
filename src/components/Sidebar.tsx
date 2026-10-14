@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react'
-import type { Conversation } from '../types'
+import type { Conversation, UserInfo } from '../types'
 import { PlusIcon, SearchIcon, SparkIcon } from './icons'
 
 interface SidebarProps {
   open: boolean
   conversations: Conversation[]
+  user: UserInfo | null
+  loadError: string | null
   activeId: string
   onSelect: (id: string) => void
   onNewChat: () => void
@@ -23,7 +25,7 @@ function groupOf(iso: string): string {
   return '更早'
 }
 
-export function Sidebar({ open, conversations, activeId, onSelect, onNewChat }: SidebarProps) {
+export function Sidebar({ open, conversations, user, loadError, activeId, onSelect, onNewChat }: SidebarProps) {
   const [query, setQuery] = useState('')
 
   const groups = useMemo(() => {
@@ -56,7 +58,11 @@ export function Sidebar({ open, conversations, activeId, onSelect, onNewChat }: 
         <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="搜索对话…" />
       </label>
       <nav className="chat-list">
-        {groups.length === 0 && <div className="group-label">没有匹配的对话</div>}
+        {groups.length === 0 && (
+          <div className="group-label">
+            {loadError ?? (query ? '没有匹配的对话' : '暂无会话')}
+          </div>
+        )}
         {groups.map(({ label, items }) => (
           <div key={label}>
             <div className="group-label">{label}</div>
@@ -75,10 +81,10 @@ export function Sidebar({ open, conversations, activeId, onSelect, onNewChat }: 
       </nav>
       <div className="sidebar-foot">
         <div className="user-chip">
-          <div className="avatar">W</div>
+          <div className="avatar">{user?.display_name.slice(0, 1) ?? '…'}</div>
           <div>
-            <div className="name">wang</div>
-            <div className="plan">MorphUI Pro</div>
+            <div className="name">{user?.display_name ?? '加载用户…'}</div>
+            <div className="plan">本地用户</div>
           </div>
         </div>
       </div>

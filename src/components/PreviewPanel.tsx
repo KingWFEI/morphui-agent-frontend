@@ -39,17 +39,21 @@ export function PreviewPanel({ url, onUrlChange, onClose }: PreviewPanelProps) {
             if (e.key === 'Enter') (e.target as HTMLInputElement).blur()
           }}
         />
-        <button className="icon-btn" title="刷新" onClick={() => setReloadKey((k) => k + 1)}>
+        <button className="icon-btn" title="刷新" onClick={() => setReloadKey((k) => k + 1)} disabled={!url}>
           <RefreshIcon size={15} />
         </button>
-        <button className="icon-btn" title="在新窗口打开" onClick={() => window.open(url, '_blank')}>
+        <button className="icon-btn" title="在新窗口打开" onClick={() => window.open(url, '_blank')} disabled={!url}>
           <ExternalLinkIcon size={15} />
         </button>
         <button className="icon-btn" title="关闭预览" onClick={onClose}>
           <XIcon size={16} />
         </button>
       </header>
-      <iframe key={reloadKey} className="preview-frame" src={url} title="MorphUI 实时预览" />
+      {url ? (
+        <iframe key={reloadKey} className="preview-frame" src={url} title="MorphUI 实时预览" />
+      ) : (
+        <div className="preview-empty">智能体准备好项目后，网页会显示在这里。</div>
+      )}
     </section>
   )
 }

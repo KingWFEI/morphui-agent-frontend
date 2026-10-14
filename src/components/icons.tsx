@@ -34,6 +34,13 @@ export const PlusIcon = (p: IconProps) => (
   </Base>
 )
 
+export const FolderIcon = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M3.5 6.5h6l2 2h9v9.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3.5 18z" />
+    <path d="M3.5 8.5h17" />
+  </Base>
+)
+
 export const SearchIcon = (p: IconProps) => (
   <Base {...p}>
     <circle cx="11" cy="11" r="7" />
@@ -44,6 +51,12 @@ export const SearchIcon = (p: IconProps) => (
 export const ArrowUpIcon = (p: IconProps) => (
   <Base {...p}>
     <path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" />
+  </Base>
+)
+
+export const StopIcon = (p: IconProps) => (
+  <Base {...p}>
+    <rect x="7" y="7" width="10" height="10" rx="1.5" fill="currentColor" stroke="none" />
   </Base>
 )
 
@@ -87,6 +100,13 @@ export const MonitorIcon = (p: IconProps) => (
   <Base {...p}>
     <rect x="2.5" y="3.5" width="19" height="13" rx="2" />
     <path d="M8.5 21h7M12 16.5V21" />
+  </Base>
+)
+
+export const ActivityLogIcon = (p: IconProps) => (
+  <Base {...p}>
+    <path d="M3 5h2M3 12h2M3 19h2M9 5h12M9 12h12M9 19h12" />
+    <path d="M6.5 5h.01M6.5 12h.01M6.5 19h.01" />
   </Base>
 )
 
